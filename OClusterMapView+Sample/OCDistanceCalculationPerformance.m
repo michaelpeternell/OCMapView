@@ -47,7 +47,7 @@ double CLLocationCoordinateDistancePow(CLLocationCoordinate2D c1, CLLocationCoor
         NSArray *otherLocs = [self randomCoordinatesGenerator:count];
         
         show([NSString stringWithFormat:@"Device/OS: '%@', iOS %@", [self platform], [[UIDevice currentDevice] systemVersion]]);
-        show([NSString stringWithFormat:@"Testing %zd runs of distance calculation per method with %@ coords", runs, [numFormatter stringFromNumber:@(count)]]);
+        show([NSString stringWithFormat:@"Testing %d runs of distance calculation per method with %@ coords", runs, [numFormatter stringFromNumber:@(count)]]);
         show([NSString stringWithFormat:@">> This will be %@ distance calculations.", [numFormatter stringFromNumber:@(count*runs)]]);
         CGFloat firstDuration = 0;
         for (int type=0; type<2; type++) {
@@ -69,7 +69,7 @@ double CLLocationCoordinateDistancePow(CLLocationCoordinate2D c1, CLLocationCoor
             duration /= runs;
             
             NSString *method = (type==0)?@"MULTIPLY":@"POW";
-            show([NSString stringWithFormat:@"== %@: AVERAGE DURATION IN %zd RUNS: %.5fs/run ====", method, runs, duration]);
+            show([NSString stringWithFormat:@"== %@: AVERAGE DURATION IN %d RUNS: %.5fs/run ====", method, runs, duration]);
             
             if (type == 1) {
                 show([NSString stringWithFormat: @"Difference: %.7fs/run", ABS(firstDuration-duration)]);

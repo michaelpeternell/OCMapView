@@ -32,8 +32,12 @@ static CGFloat kDEFAULTCLUSTERSIZE = 0.2;
         }
         [self.view performSelector:@selector(setTintColor:) withObject:[UIColor cyanColor]];
         self.mapView.frame = CGRectMake(0, 20, self.view.bounds.size.width, self.view.bounds.size.height-20);
-        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     }
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
 }
 
 - (void)viewDidAppear:(BOOL)animated;
@@ -210,17 +214,17 @@ static CGFloat kDEFAULTCLUSTERSIZE = 0.2;
         if (!annotationView) {
             annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"errorAnnotationView"];
             annotationView.canShowCallout = NO;
-            ((MKPinAnnotationView *)annotationView).pinColor = MKPinAnnotationColorRed;
+            ((MKPinAnnotationView *)annotationView).pinTintColor = [UIColor systemRedColor];
         }
     }
     
     return annotationView;
 }
 
-- (MKOverlayView *)mapView:(MKMapView *)mapView viewForOverlay:(id <MKOverlay>)overlay
+- (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay
 {
     MKCircle *circle = overlay;
-    MKCircleView *circleView = [[MKCircleView alloc] initWithCircle:overlay];
+    MKCircleRenderer *circleView = [[MKCircleRenderer alloc] initWithCircle:overlay];
     
     if ([circle.title isEqualToString:@"background"])
     {
